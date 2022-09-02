@@ -16,14 +16,15 @@ listadoItems.Add(item6);
 Item item7 = new Item("Guante", 50, 60, 100);
 listadoItems.Add(item7);
 
-
+//TODO: Crear distintos tipos de Personajes
 Personaje Player1 = new Personaje("Player 1");
 Personaje Player2 = new Personaje("Player 2");
 
 
-bool Turno = true; 
+bool Turno = true;
 // True => Turno jugador 1 --- False => Turno Jugador 2
-
+Personaje Ganador = null;
+Personaje Perdedor = null;
 
 do
 {
@@ -38,8 +39,15 @@ do
     Console.WriteLine("--------------------");
 
     //Estadisticas de los Players
-    Console.WriteLine($"Stats Jugador 1: Vida: { Player1.Vida }, Fuerza: {Player1.Fuerza}, Oro: {Player1.Oro}");
-    Console.WriteLine($"Stats Jugador 2: Vida: { Player2.Vida }, Fuerza: {Player2.Fuerza}, Oro: {Player2.Oro}");
+    //TODO: Mostrar el Inventario
+    Console.WriteLine($"Stats Jugador 1: " +
+        $"Vida: { Player1.Vida }, " +
+        $"Fuerza: {Player1.Fuerza}, " +
+        $"Oro: {Player1.Oro}");
+    Console.WriteLine($"Stats Jugador 2: " +
+        $"Vida: { Player2.Vida }, " +
+        $"Fuerza: {Player2.Fuerza}, " +
+        $"Oro: {Player2.Oro}");
 
 
     //Menu
@@ -49,12 +57,14 @@ do
 
     Console.Write("Que quieres hacer: ");
     string Opcion = Console.ReadLine();
+    int vidaRestante = 1;
+    
 
     switch (Opcion)
     {
-        case "1": //Ataco
-            if (Turno) Player1.Atacar(Player2);
-            else Player2.Atacar(Player1);
+        case "1": //Atacar
+            if (Turno) vidaRestante = Player1.Atacar(Player2);
+            else vidaRestante = Player2.Atacar(Player1);
             break;
 
         case "2": //Comprar
@@ -66,9 +76,10 @@ do
                 Console.WriteLine($"{item.Nombre}, Vida: +{item.Vida}, " +
                     $"Fuerza: +{item.Fuerza}, Coste: {item.Coste}");
             }
-            Console.Write("Elige el Itemque quiere Comprar: ");
+            Console.Write("Elige el Item que quiere Comprar: ");
             string compra = Console.ReadLine();
 
+            //TODO: Validar el ingreso de el nombre Item
             Item? i = listadoItems.Find(x => x.Nombre == compra);
 
             if (Turno) Player1.Comprar(i);
@@ -79,8 +90,22 @@ do
             break;
     }
 
+    //Finalizar Turno
+
+    if(vidaRestante <= 0)
+    {
+        //Perdedor y Ganador
+        if (Turno == true) Ganador = Player1;
+        else Ganador = Player2;
+        break;
+    }
+
 
     Turno = !Turno;
     //Console.ReadLine();
     
 } while (true);
+
+Console.Clear();
+Console.WriteLine($"{Ganador.Nombre} gana la partida!");
+Console.ReadLine();

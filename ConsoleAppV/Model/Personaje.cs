@@ -2,22 +2,26 @@
 {
     public class Personaje
     {
+        //TODO: Podriamos generar habilidades ()
         public string Nombre { get; }
         public int Vida { get; set; } = 100;
         public int Fuerza { get; set; } = 100;
         public int Oro { get; set; } = 1000;
-        public List<Item> ItemsEquipados { get; set; }
+        public List<Item> Inventario { get; set; }
 
 
         public Personaje(string nombre)
         {
-            Nombre = nombre;
-            ItemsEquipados = new List<Item>();
+            //asdasdAASDDASaasaads Aasdasd Aasdasd
+            Nombre = nombre.ToUpper();
+            Inventario = new List<Item>();
         }
 
-        public void Atacar(Personaje Objetivo)
+        public int Atacar(Personaje Objetivo)
         {
+            //TODO: Aplicar mas Factores (Robo de Vida, Evasion, Critico)
             Objetivo.Vida -= Fuerza / 15 + 10;
+            return Objetivo.Vida; // 80
         }
 
         public void Comprar(Item item)
@@ -25,7 +29,7 @@
             Oro -= item.Coste;
             Fuerza += item.Fuerza;
             Vida += item.Vida;
-            ItemsEquipados.Add(item);
+            Inventario.Add(item);
         }
 
 
