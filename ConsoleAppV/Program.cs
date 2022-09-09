@@ -44,10 +44,28 @@ do
         $"Vida: { Player1.Vida }, " +
         $"Fuerza: {Player1.Fuerza}, " +
         $"Oro: {Player1.Oro}");
+
+    string inventario = "";
+    foreach (Item item in Player1.Inventario)
+    {
+        inventario += $"{item.Nombre}===";
+    }
+    Console.WriteLine($"Inventario {Player1.Nombre}: {inventario}");
+
+    Console.WriteLine("---------------------------------");
+
+    inventario = "";
     Console.WriteLine($"Stats Jugador 2: " +
         $"Vida: { Player2.Vida }, " +
         $"Fuerza: {Player2.Fuerza}, " +
         $"Oro: {Player2.Oro}");
+    foreach (Item item in Player2.Inventario)
+    {
+        inventario += $"{item.Nombre}===";
+    }
+    Console.WriteLine($"Inventario {Player2.Nombre}: {inventario}");
+
+    Console.WriteLine("-----------------------------------");
 
 
     //Menu
