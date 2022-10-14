@@ -1,4 +1,5 @@
-﻿using ConsoleAppEntityFramework.Model;
+﻿using ConsoleAppEntityFramework.Migrations;
+using ConsoleAppEntityFramework.Model;
 using Microsoft.EntityFrameworkCore;
 
 do
@@ -14,7 +15,11 @@ do
     Console.WriteLine("-------------------");
     Console.WriteLine("[7] - Insertar Venta");
     Console.WriteLine("[8] - Ver Ventas");
-
+    Console.WriteLine("-------------------");
+    Console.WriteLine("[9] - Insertar Categoria");
+    Console.WriteLine("[10] - Ver Categorias");
+    Console.WriteLine("[11] - Ver Categorias por Id");
+    Console.WriteLine("[12] - Ver Categorias por Nombre");
 
 
     Console.Write("\nSelecciona una Opcion: ");
@@ -22,6 +27,74 @@ do
 
     switch (opcion)
     {
+        case "9":
+            Console.Clear();
+            Console.Write("Nombre: "); var nameC = Console.ReadLine();
+            Console.Write("Descripcion: "); var descC = Console.ReadLine();
+
+            Categoria Cat = new Categoria()
+            {
+                Name = nameC,
+                Descripcion = descC,
+            };
+
+            using (var context = new AppDbContext())
+            {
+                context.Add(Cat);
+                context.SaveChanges();
+            }
+
+            Console.WriteLine("Categoria Agregada");
+            Console.ReadLine();
+            break;
+
+        case "10":
+
+            using (var context = new AppDbContext())
+            {
+                var Categorias = context.tblCategorias.ToList();
+                foreach (var item in Categorias)
+                {
+                    Console.WriteLine($"Id: {item.CategoriaId} | Nombre: {item.Name} | Desc: {item.Descripcion}");
+                }
+            }
+            Console.ReadLine();
+            break;
+
+        case "11":
+            Console.Clear();
+            Console.Write("Id que estas Buscando: ");
+            var idBuscado = Convert.ToInt32(Console.ReadLine());
+            using (var context = new AppDbContext())
+            {
+                var CategoriaBuscada = context.tblCategorias.Find(idBuscado);
+                if (CategoriaBuscada != null)
+                    Console.WriteLine($"Id: {CategoriaBuscada.CategoriaId} | Nombre: {CategoriaBuscada.Name} | Desc: {CategoriaBuscada.Descripcion}");
+                else Console.WriteLine("No se encontro Categoria con el id proporcionado!");
+            }
+            Console.ReadLine();
+            break;
+
+        case "12":
+            Console.Clear();
+            Console.Write("Categoria que estas Buscando: ");
+            var nombreBuscado = Console.ReadLine();
+            using (var context = new AppDbContext())
+            {
+                var CategoriaBuscada2 = context.tblCategorias.Where(c=> c.Name.Contains(nombreBuscado)).ToList();
+                if (CategoriaBuscada2.Count != 0)
+                {
+                    foreach (var item in CategoriaBuscada2)
+                    {
+                        Console.WriteLine($"Id: {item.CategoriaId} | Nombre: {item.Name} | Desc: {item.Descripcion}");
+                    }
+                }
+                else Console.WriteLine("No se encontraron Categorias con el nombre proporcionado!");
+            }
+            Console.ReadLine();
+            break;
+
+
         case "1":
 
             Console.Clear();
@@ -29,13 +102,15 @@ do
             Console.Write("Precio: "); var precio = Convert.ToInt32(Console.ReadLine());
             Console.Write("Stock: "); var stock = Convert.ToInt32(Console.ReadLine());
             Console.Write("Url: "); var url = Console.ReadLine();
+            Console.Write("Id Categoria: "); var catid = Convert.ToInt32(Console.ReadLine());
 
             Producto P = new Producto()
             {
                 Name = name,
                 Precio = precio,
                 Stock = stock,
-                UrlImagen = url
+                UrlImagen = url,
+                CategoriaId = catid
             };
 
             using (var context = new AppDbContext())
@@ -52,12 +127,12 @@ do
             Console.Clear();
             using (var context = new AppDbContext())
             {
-                var ProductosGuardados = context.tblProductos.ToList();
+                var ProductosGuardados = context.tblProductos.Include(p=>p.Categoria).ToList();
                 foreach (var item in ProductosGuardados)
                 {
                     Console.WriteLine($"Id: {item.Id} | Name: {item.Name} | " +
                         $"Precio: {item.Precio} | Stock: {item.Stock} | " +
-                        $"Url: {item.UrlImagen}");
+                        $"Url: {item.UrlImagen} | Categoria: {item.Categoria.Name}");
                 }
             }
             Console.WriteLine("Productos Listados...");

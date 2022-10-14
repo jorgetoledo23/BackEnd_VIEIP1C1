@@ -12,7 +12,10 @@
         public string ClienteRut { get; set; }
         public Cliente Cliente { get; set; }
 
-        //Fk
+        
+        
+        //Propiedad De Navegacion
         public List<DetalleVenta> DetalleVenta { get; set; }
+
     }
 }
