@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppEntityFramework", "ConsoleAppEntityFramework\ConsoleAppEntityFramework.csproj", "{C49D6DCB-22AC-4231-BE5F-8C4D70745225}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema Web MVC", "Sistema Web MVC\Sistema Web MVC.csproj", "{BC2A433A-BBC3-4F1D-B2F2-B1318D55B487}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C49D6DCB-22AC-4231-BE5F-8C4D70745225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C49D6DCB-22AC-4231-BE5F-8C4D70745225}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C49D6DCB-22AC-4231-BE5F-8C4D70745225}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C49D6DCB-22AC-4231-BE5F-8C4D70745225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC2A433A-BBC3-4F1D-B2F2-B1318D55B487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC2A433A-BBC3-4F1D-B2F2-B1318D55B487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC2A433A-BBC3-4F1D-B2F2-B1318D55B487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC2A433A-BBC3-4F1D-B2F2-B1318D55B487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
