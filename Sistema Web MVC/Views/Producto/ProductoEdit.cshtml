@@ -1,0 +1,55 @@
+﻿@model Sistema_Web_MVC.Models.Producto
+
+@{
+    ViewData["Title"] = "Crear Producto";
+}
+
+<div class="card text-center">
+    <div class="card-body">
+        <h3 class="card-title">Administracion de Productos</h3>
+        <p class="card-text">Creando Producto</p>
+        <a asp-action="ProductoHome"
+           class="btn btn-primary"><i class="fa-solid fa-arrow-left m-2"></i>Volver al Listado</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ProductoEdit">
+            <input type="hidden" asp-for="ProductoId" value="@Model.ProductoId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-3">
+                <input asp-for="Nombre" class="form-control" placeholder="Nombre"/>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input asp-for="Descripcion" class="form-control" placeholder="Descripcion" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input asp-for="Precio" class="form-control" placeholder="Valor" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input asp-for="Stock" class="form-control" placeholder="Stock" />
+                <span asp-validation-for="Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input asp-for="UrlImagen" class="form-control" placeholder="Imagen" />
+                <span asp-validation-for="UrlImagen" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.Categorias"></select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary col-12" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,43 @@
+﻿@model List<Producto>
+<div class="card text-center">
+    <div class="card-body">
+        <h3 class="card-title">Administracion de Productos</h3>
+        <p class="card-text">Crea, Edita o Elimina los Productos del Sistema</p>
+        <a asp-action="ProductoCreate"
+            class="btn btn-primary"><i class="fa-solid fa-circle-plus m-2"></i>Crear Producto</a>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Producto Id</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Imagen</th>
+            <th>Categoria</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.ProductoId</th>
+                <th>@item.Nombre</th>
+                <th>@item.Descripcion</th>
+                <th>@item.Precio.ToString("C")</th>
+                <th>@item.Stock</th>
+                <th><img class="img-fluid" src="@item.UrlImagen" width="100" height="100" /></th>
+                <th>@item.Categoria.Nombre</th>
+                <th>
+                    <a asp-action="ProductoEdit" asp-route-Id="@item.ProductoId"><i class="fa-regular fa-pen-to-square m-2"></i></a>
+                    <a onclick="return confirm('¿Estas Seguro de Eliminar?')"
+                        asp-action="ProductoDelete" asp-route-Id="@item.ProductoId"><i class="fa-solid fa-trash m-2"></i></a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

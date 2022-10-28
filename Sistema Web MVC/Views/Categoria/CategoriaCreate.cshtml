@@ -1,0 +1,36 @@
+﻿@model Sistema_Web_MVC.Models.Categoria
+
+@{
+    ViewData["Title"] = "Crear Categoria";
+}
+
+<div class="card text-center">
+    <div class="card-body">
+        <h3 class="card-title">Administracion de Productos</h3>
+        <p class="card-text">Creando Categoria</p>
+        <a asp-action="CategoriaHome"
+           class="btn btn-primary"><i class="fa-solid fa-arrow-left m-2"></i>Volver al Listado</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CategoriaCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-3">
+                <input asp-for="Nombre" class="form-control" placeholder="Nombre"/>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input asp-for="Descripcion" class="form-control" placeholder="Descripcion" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Crear Categoria" class="btn btn-primary col-12" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
