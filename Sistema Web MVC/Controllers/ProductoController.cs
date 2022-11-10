@@ -14,9 +14,9 @@ namespace Sistema_Web_MVC.Controllers
             _context = context;
         }
 
-        public IActionResult ProductoHome()
+        public async Task<IActionResult> ProductoHome()
         {
-            var productosDelSistema = _context.Productos.Include(p=>p.Categoria).ToList();
+            var productosDelSistema = await _context.Productos.Include(p=>p.Categoria).ToListAsync();
             return View(productosDelSistema);
         }
         public IActionResult ProductoCreate()
