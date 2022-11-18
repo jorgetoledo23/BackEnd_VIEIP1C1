@@ -14,9 +14,35 @@ namespace Sistema_Web_MVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> ProductoHome()
+        public async Task<IActionResult> ProductoHome(string Filtro, int CategoriaId)
         {
-            var productosDelSistema = await _context.Productos.Include(p=>p.Categoria).ToListAsync();
+            List<Producto> productosDelSistema = new List<Producto>();
+            if (Filtro != null && CategoriaId != 0)
+            {
+                productosDelSistema = await _context.Productos
+                    .Where(p=> (p.Nombre.Contains(Filtro) || p.Descripcion.Contains(Filtro)) && p.CategoriaId == CategoriaId)
+                    .Include(p => p.Categoria).ToListAsync();
+            }
+            if(Filtro != null && CategoriaId == 0)
+            {
+                productosDelSistema = await _context.Productos
+                    .Where(p => p.Nombre.Contains(Filtro) || p.Descripcion.Contains(Filtro))
+                    .Include(p => p.Categoria).ToListAsync();
+            }
+            if(Filtro == null && CategoriaId != 0)
+            {
+                productosDelSistema = await _context.Productos
+                    .Where(p => p.CategoriaId == CategoriaId)
+                    .Include(p => p.Categoria).ToListAsync();
+            }
+            if(Filtro == null && CategoriaId == 0)
+            {
+                productosDelSistema = await _context.Productos.Include(p => p.Categoria).ToListAsync();
+            }
+
+
+            var categorias = _context.Categorias.ToList();
+            ViewData["Categorias"] = new SelectList(categorias, "CategoriaId", "Nombre");
             return View(productosDelSistema);
         }
         public IActionResult ProductoCreate()

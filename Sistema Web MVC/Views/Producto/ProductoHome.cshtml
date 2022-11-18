@@ -5,10 +5,15 @@
         <p class="card-text">Crea, Edita o Elimina los Productos del Sistema</p>
         <a asp-action="ProductoCreate"
             class="btn btn-primary"><i class="fa-solid fa-circle-plus m-2"></i>Crear Producto</a>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa-solid fa-filter m-2"></i>
+                Filtrar
+            </a>   
     </div>
 </div>
 
-<table class="table table-striped">
+
+<table class="table">
     <thead>
         <tr>
             <th>Producto Id</th>
@@ -41,3 +46,32 @@
         }
     </tbody>
 </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Filtrar Productos</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center m-3">
+                    <div class="mt-2">
+                        <form asp-action="ProductoHome" method="get">
+                            <input name="Filtro" class="form-control" type="text" placeholder="Filtro" />
+
+                            <select class="form-control mt-3" name="CategoriaId" asp-items="ViewBag.Categorias">
+                                <option value="0">Selecciona Categoria...</option>
+                            </select>
+
+                            <input class="btn btn-outline-danger col-12 mt-2" type="submit" value="Filtrar Productos" />
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
